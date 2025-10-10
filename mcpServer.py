@@ -11,9 +11,10 @@ class MCPHandler(BaseHTTPRequestHandler):
         prompt = message.get("prompt", "")
         # TODO change this
         # Simple routing logic
-        if "temperature" in prompt.lower():
+        if "jacket" in prompt.lower():
             temp = getTemperature()
-            response_text = f"The temperature is {temp}°F."
+            tempPrompt = f" The temperature is {temp}°F. Keep response to one sentence. Give a yes or no."
+            response_text = query_ollama(prompt + tempPrompt)
         else:
             # Let the model decide how to answer
             response_text = query_ollama(prompt)
