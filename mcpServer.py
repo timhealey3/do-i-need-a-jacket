@@ -1,7 +1,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from ollamaClient import query_ollama
-from util import getTemperature
+from util import getTemperature, getHumidity
 
 class MCPHandler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -14,6 +14,10 @@ class MCPHandler(BaseHTTPRequestHandler):
         if "jacket" in prompt.lower():
             temp = getTemperature()
             tempPrompt = f" The temperature is {temp}°F. Keep response to one sentence. Give a yes or no."
+            response_text = query_ollama(prompt + tempPrompt)
+        elif "humid" in prompt.lower():
+            humidity = getHumidity()
+            tempPrompt = f" The humidity is {humidity}. Keep response to one sentence. Give a yes or no."
             response_text = query_ollama(prompt + tempPrompt)
         else:
             # Let the model decide how to answer
