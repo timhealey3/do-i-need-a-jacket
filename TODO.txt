@@ -1,4 +1,5 @@
-- 
+- help function
+-  
 
 
-Hours spent: 3
+Hours spent: 4
