@@ -17,7 +17,6 @@ def ask(prompt):
 def displayResponse(response):
     print("Gemma3:4b:", response.json()["response"])
 
-
 def coreLoop():
     while True:
         user_input = input("> ")
