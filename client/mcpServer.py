@@ -5,7 +5,7 @@ from util import getAltitude, getTemperature, getHumidity
 
 class MCPHandler(BaseHTTPRequestHandler):
     routingMap = {
-        "temp": ["temp", "temperature"], "jacket": ["jacket", "coat"], "humidity": ["humidity", "humid"], "altitude": ["alt", "altitude"]
+        "help": ["help"], "temp": ["temp", "temperature"], "jacket": ["jacket", "coat"], "humidity": ["humidity", "humid"], "altitude": ["alt", "altitude"]
         }
 
     def handle_jacket(self):
@@ -28,6 +28,9 @@ class MCPHandler(BaseHTTPRequestHandler):
             prompt = f"this altitude in meters is {altitude}. Keep response to one sentence."
             return prompt
 
+    def handle_help(self):
+        return "The user is asking for help in using the chatbot. You can read data from a arduino board, these functions are get altitude, humidity, altitude, temperature, or do you need a jacket? Respond only in one sentence"
+
     def in_routing(self, prompt, key):
         return any(word in prompt for word in self.routingMap[key])
 
@@ -41,6 +44,8 @@ class MCPHandler(BaseHTTPRequestHandler):
                 prompt += self.handle_humidity()
             case prompt if self.in_routing(prompt, "altitude"):
                 prompt += self.handle_altitude()
+            case prompt if self.in_routing(prompt, "help"):
+                prompt += self.handle_help()
         return prompt
 
     def do_POST(self):
