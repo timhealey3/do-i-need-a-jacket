@@ -2,6 +2,8 @@
 
 A small project that reads sensor data from an Arduino Nano 33 BLE and exposes it via a HTTP server. The client sends natural language prompts to the server, which augments the prompt with live sensor data and queries an Local Ollama LLM (default `gemma3:4b`) to generate a short response.
 
+## Examples
+<img width="889" height="102" alt="Screenshot 2025-10-16 at 10 03 27 PM" src="https://github.com/user-attachments/assets/f918c55a-0e27-4daf-859f-e1915cd99c6e" />
 
 ### Prerequisites
 - Python 3.12+
